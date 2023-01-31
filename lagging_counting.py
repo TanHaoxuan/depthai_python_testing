@@ -94,13 +94,13 @@ with dai.Device(pipeline) as device:
     sensIso=200
 
     expTime_state1=1000
-    expTime_state2=8000
+    expTime_state2=10000
     expTime=1000
 
-    frame_lacking_A = 0
-    frame_lacking_B = 0
-    frame_lacking_C = 0
-    frame_lacking_D = 0
+    frame_lagging_A = 0
+    frame_lagging_B = 0
+    frame_lagging_C = 0
+    frame_lagging_D = 0
 
 
     #ensure exposure_sent == exposure_received
@@ -136,32 +136,31 @@ with dai.Device(pipeline) as device:
         #received exposure == sent exposure
         # if(exposure_received_A == exposure_sent_A):   
 
-        #     print(f"frame lacking A = {frame_lacking_A}")
+        #     print(f"frame lagging A = {frame_lagging_A}")
         #     #reset
-        #     frame_lacking_A=0
+        #     frame_lagging_A=0
         # else:   #not receiving the sent exposure
-        #     frame_lacking_A+=1
-
+        #     frame_lagging_A+=1
         if(exposure_received_B == exposure_sent_B):   
 
-            print(f"frame lacking B = {frame_lacking_B}")
+            print(f"frame lagging B = {frame_lagging_B}")
             #reset
         else:   #not receiving the sent exposure
-            frame_lacking_B+=1
+            frame_lagging_B+=1
 
         if(exposure_received_C == exposure_sent_C):   
 
-            print(f"frame lacking C = {frame_lacking_C}")
+            print(f"frame lagging C = {frame_lagging_C}")
             #reset
         else:   #not receiving the sent exposure
-            frame_lacking_C+=1
+            frame_lagging_C+=1
 
         if(exposure_received_D == exposure_sent_D):   
 
-            print(f"frame lacking D = {frame_lacking_D}")
+            print(f"frame lagging D = {frame_lagging_D}")
             #reset
         else:   #not receiving the sent exposure
-            frame_lacking_D+=1
+            frame_lagging_D+=1
 
         #display image
         cv2.imshow("camb", inB.getCvFrame())
@@ -177,10 +176,10 @@ with dai.Device(pipeline) as device:
             exposure_sent_C=expTime
             exposure_sent_D=expTime
 
-            frame_lacking_A=0
-            frame_lacking_B=0
-            frame_lacking_C=0
-            frame_lacking_D=0
+            frame_lagging_A=0
+            frame_lagging_B=0
+            frame_lagging_C=0
+            frame_lagging_D=0
 
 
             ctrl = dai.CameraControl()
@@ -198,10 +197,10 @@ with dai.Device(pipeline) as device:
             exposure_sent_C=expTime
             exposure_sent_D=expTime
 
-            frame_lacking_A=0
-            frame_lacking_B=0
-            frame_lacking_C=0
-            frame_lacking_D=0
+            frame_lagging_A=0
+            frame_lagging_B=0
+            frame_lagging_C=0
+            frame_lagging_D=0
             
             ctrl = dai.CameraControl()
             ctrl.setManualExposure(expTime, sensIso)
