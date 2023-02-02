@@ -12,19 +12,19 @@ camc_filepath = 'recorded_data/camc_mono.h264'
 pipeline = dai.Pipeline()
 
 # Define 
-#source
+#camera node
 monoB = pipeline.create(dai.node.MonoCamera)
 monoC = pipeline.create(dai.node.MonoCamera)
-#encoder
+#encoder node
 veB = pipeline.create(dai.node.VideoEncoder)
 veC = pipeline.create(dai.node.VideoEncoder)
-#output
+#XLinkOut node : the data being stored
 veBOut = pipeline.create(dai.node.XLinkOut)
 veCOut = pipeline.create(dai.node.XLinkOut)
 
 veBOut.setStreamName('veBOut')
 veCOut.setStreamName('veCOut')
-#display
+#display nodes
 manipB = pipeline.create(dai.node.ImageManip)
 manipC = pipeline.create(dai.node.ImageManip)
 manipOutB = pipeline.create(dai.node.XLinkOut)
@@ -36,15 +36,15 @@ manipOutC.setStreamName("manipCOut")
 
 
 # Properties
-#source
+#camera node
 monoB.setBoardSocket(dai.CameraBoardSocket.CAM_B)
 monoC.setBoardSocket(dai.CameraBoardSocket.CAM_C)
 monoB.setFps(30)
 monoC.setFps(30)
-#encoder
+#encoder node
 veB.setDefaultProfilePreset(30, dai.VideoEncoderProperties.Profile.H264_MAIN)
 veC.setDefaultProfilePreset(30, dai.VideoEncoderProperties.Profile.H265_MAIN)
-#display
+#display nodes
 monoB.setResolution(dai.MonoCameraProperties.SensorResolution.THE_720_P)
 manipB.setMaxOutputFrameSize(monoB.getResolutionHeight()*monoB.getResolutionWidth()*3)
 monoC.setResolution(dai.MonoCameraProperties.SensorResolution.THE_720_P)
@@ -52,14 +52,14 @@ manipC.setMaxOutputFrameSize(monoC.getResolutionHeight()*monoC.getResolutionWidt
 
 
 # Linking
-#source -> encoder
+#camera -> encoder
 monoB.out.link(veB.input)
 monoC.out.link(veC.input)
 #encoder -> output
 veB.bitstream.link(veBOut.input)
 veC.bitstream.link(veCOut.input)
 
-#source -> manip
+#camera -> manip
 monoB.out.link(manipB.inputImage) 
 monoC.out.link(manipC.inputImage) 
 #manip -> display

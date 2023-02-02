@@ -4,15 +4,15 @@ import cv2
 import depthai as dai
 
 
-# Create pipeline
 
+# Create pipeline
 pipeline = dai.Pipeline()
+
 
 
 # Define 
 
-#source
-
+#camera node
 # monoA= pipeline.create(dai.node.MonoCamera)
 monoB= pipeline.create(dai.node.MonoCamera)
 monoC= pipeline.create(dai.node.MonoCamera)
