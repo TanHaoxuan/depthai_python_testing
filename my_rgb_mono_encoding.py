@@ -81,7 +81,6 @@ with dai.Device(pipeline) as dev:
 
 
     def read_and_display_img():
-        print("I am in the thread")
         while True:
             if(showQ_B.has()):
                 cv2.imshow("camb", showQ_B.get().getCvFrame())
