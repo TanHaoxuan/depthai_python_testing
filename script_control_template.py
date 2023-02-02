@@ -10,13 +10,23 @@ pipeline = dai.Pipeline()
 #source
 monoB = pipeline.create(dai.node.MonoCamera)
 manipB = pipeline.create(dai.node.ImageManip)
+# XLinkIN
+xin = pipeline.create(dai.node.XLinkIn)
+xin.setStreamName('in')
 # XLinkOut
 manipOutB = pipeline.create(dai.node.XLinkOut)
 manipOutB.setStreamName('manipBOut')
+
+xout = pipeline.create(dai.node.XLinkOut) # xout is for display purpose
+xout.setStreamName('output_stream')
 # Script node
 script = pipeline.create(dai.node.Script)
 script.setScript("""
     import time
+
+    data = node.io['in'].get().getData()
+
+
     ctrl = CameraControl()
     # ctrl.setCaptureStill(True)
     while True:
@@ -36,12 +46,12 @@ monoB.setResolution(dai.MonoCameraProperties.SensorResolution.THE_720_P)
 manipB.setMaxOutputFrameSize(monoB.getResolutionHeight()*monoB.getResolutionWidth()*3)
 
 # Linking
-#script -> inputControl
-#source -> output ?
-xout = pipeline.create(dai.node.XLinkOut)
-xout.setStreamName('output_stream')
-
+#source -> output 
 monoB.out.link(xout.input)
+
+#xlinkin -> script
+xin.out.link(script.inputs['in'])
+#script -> inputControl
 script.outputs['out'].link(monoB.inputControl)
 
 #source -> manip
@@ -53,9 +63,22 @@ manipB.out.link(manipOutB.input)
 # Connect to device with pipeline
 with dai.Device(pipeline) as dev:
     
+    #input queue
+    inputQ_B = dev.getInputQueue(name=xin.getStreamName())
+
     #display queue : 
     showQ_B = dev.getOutputQueue(name=manipOutB.getStreamName(), maxSize=4,blocking=False)
     scriptOutQ_B = dev.getOutputQueue(name=xout.getStreamName(),maxSize=4,blocking=False)
+
+    # how to send data Xlink : json
+    dict = {'one':1, 'foo': 'bar'}
+    print('dict', dict)
+    data = json.dumps(dict).encode('utf-8')
+    buffer = dai.Buffer()
+    buffer.setData(list(data)) #setData is the data we want to send
+    inputQ_B.send(buffer)
+
+
 
 
     def read_and_display_img():
