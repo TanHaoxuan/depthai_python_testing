@@ -93,9 +93,9 @@ with dai.Device(pipeline) as device:
 
     sensIso=200
 
-    expTime_state1=1000
-    expTime_state2=10000
-    expTime=1000
+    expTime_state1 = 1000
+    expTime_state2 = 10000
+    expTime = 1000
 
     frame_lagging_A = 0
     frame_lagging_B = 0
