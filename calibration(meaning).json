@@ -1,0 +1,155 @@
+{
+    "value0": {
+        "cam_names": [
+            #camera names in calibration
+        ],
+        "T_imu_body": { # translation matrix of imu 
+            "px": 0.0, 
+            "py": 0.0,
+            "pz": 0.0,
+            "qx": 0.0,
+            "qy": 0.0,
+            "qz": 0.0,
+            "qw": 1.0
+        },
+        "T_imu_cam": [ 
+            # translation matrix of the cameras in cam_names, following the order in cam_names; 
+            # Check if px,py,pz is the same is real displacement
+            {
+                "px": 0.0, # x axis displacement from reference point
+                "py": 0.0, # y axis displacement from reference point
+                "pz": 0.0, # z axis displacement from reference point
+                "qx": 0.0, # quaternion x parameter
+                "qy": 0.0, # quaternion y parameter
+                "qz": 0.0, # quaternion z parameter
+                "qw": 1.0  # quaternion w parameter
+            },
+            {
+                "px": -0.10027737097676932,
+                "py": -0.0012553415391127967,
+                "pz": -0.08518444489275612,
+                "qx": -0.010046909049588767,
+                "qy": -0.6469251522200148,
+                "qz": 0.014001454031377214,
+                "qw": 0.7623587517230107
+            },
+            {
+                "px": -0.0821773436906192,
+                "py": -0.00027116765636320457,
+                "pz": -0.004726408135700676,
+                "qx": 0.002324974686179078,
+                "qy": -0.3468590660958318,
+                "qz": 0.005483607714159494,
+                "qw": 0.9378983488663755
+            }
+        ],
+        "intrinsics": [ 
+            # intrinsics information of the cameras in cam_names, following the order in cam_names; 
+            # the same len type should have almost identical parameters (if using the same calibration model)
+            {
+                "camera_type": "kb4", # camera model used for calibration
+                "intrinsics": {
+                    "fx": 463.1268275989479, # Focal length (fx, fy): distance between the camera lens and the image sensor when the lens is focused at infinity
+                    "fy": 463.48745094255016, 
+                    "cx": 651.9843553065701, # Principal point (cx, cy): The principal point is the point on the image sensor where the optical axis intersects.
+                    "cy": 411.94742682151317,
+                    "k1": 0.046230121261793068, # Distortion parameters (k1, k2, k3, k4):
+                    "k2": 0.030586639597079879,
+                    "k3": -0.012868908856329428,
+                    "k4": 0.001481628642322145
+                }
+            },
+            {
+                "camera_type": "kb4",
+                "intrinsics": {
+                    "fx": 463.77930223134788,
+                    "fy": 463.98922332620398,
+                    "cx": 638.7443804350886,
+                    "cy": 407.01782710283376,
+                    "k1": 0.04202434139061586,
+                    "k2": 0.03609178724680579,
+                    "k3": -0.013636716702377278,
+                    "k4": 0.0016685716810974695
+                }
+            },
+            {
+                "camera_type": "kb4",
+                "intrinsics": {
+                    "fx": 627.0981356846523,
+                    "fy": 626.7247015516879,
+                    "cx": 979.7748857002528,
+                    "cy": 608.0797623166135,
+                    "k1": -0.025939221367562206,
+                    "k2": -0.00002110182760799146,
+                    "k3": -0.0003015523509253465,
+                    "k4": -0.00005196329942663432
+                }
+            }
+        ],
+        "resolution": [ # camera resolution: width, height
+            [
+                1280,
+                800
+            ],
+            [
+                1280,
+                800
+            ],
+            [
+                1920,
+                1200
+            ]
+        ],
+        "calib_accel_bias": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+        "calib_gyro_bias": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+        ],
+		# the rest are imu parameters which are seldom used to check
+        "imu_name": "",
+        "imu_update_rate": 200.0,
+        "accel_noise_std": [
+            0.016,
+            0.016,
+            0.016
+        ],
+        "gyro_noise_std": [
+            0.000282,
+            0.000282,
+            0.000282
+        ],
+        "accel_bias_std": [
+            0.001,
+            0.001,
+            0.001
+        ],
+        "gyro_bias_std": [
+            0.0001,
+            0.0001,
+            0.0001
+        ],
+        "stereo_pairs": [],
+        "cam_time_offset_ns": 0,
+        "vignette": []
+    }
+}
